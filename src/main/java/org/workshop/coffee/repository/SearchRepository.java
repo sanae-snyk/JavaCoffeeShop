@@ -22,11 +22,13 @@ public class SearchRepository {
         //inputを小文字に変換
         var lowerInput = input.toLowerCase(Locale.ROOT);
         //inputとproduct_nameかdescriptionが一致するSQL文を生成
-        var sql = "SELECT * FROM product WHERE LOWER(product_name) LIKE '%" + lowerInput + "%' OR LOWER(description) LIKE '%" + lowerInput + "%'";
+        //var sql = "SELECT * FROM product WHERE LOWER(product_name) LIKE '%" + lowerInput + "%' OR LOWER(description) LIKE '%" + lowerInput + "%'";
+        //inputとproduct_nameかdescriptionが一致する名前付きのパラメーターを使ったSQL文を生成
+        var sql = "SELECT * FROM product WHERE LOWER(product_name) LIKE :input OR LOWER(description) LIKE :input";
         //nativeQueryを使ってSQL文を実行
-        var query = em.createNativeQuery(sql, Product.class);
-        //結果を返す
-        return query.getResultList();
+        return em.createNativeQuery(sql, Product.class)
+                .setParameter("input", "%" + lowerInput + "%")
+                .getResultList();
     }
 
 }
