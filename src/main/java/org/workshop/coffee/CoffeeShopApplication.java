@@ -17,7 +17,7 @@ public class CoffeeShopApplication {
         System.out.println("start filling");
         return (args) -> {
             filler.createAdmin("Admin", "admin");
-            filler.createCustomer("loz", "123123");
+            filler.createCustomer("sanae", "123123");
             filler.createPeople(6);
             filler.createCoffees(10);
             filler.createBeers(8);
